@@ -31,7 +31,7 @@ goog.require('Blockly.Generator');
 
 
 /**
- * JavaScript code generator.
+ * ASEBA code generator.
  * @type !Blockly.Generator
  */
 Blockly.ASEBA = new Blockly.Generator('ASEBA');
@@ -94,7 +94,7 @@ Blockly.ASEBA.init = function() {
   // to actual function names (to avoid collisions with user functions).
   Blockly.ASEBA.functionNames_ = Object.create(null);
 
-  Blockly.ASEBA.GLOBAL_VARIABLES = {};
+  Blockly.ASEBA.internalVariables_ = {};
 
   if (!Blockly.ASEBA.variableDB_) {
     Blockly.ASEBA.variableDB_ =
@@ -120,7 +120,7 @@ Blockly.ASEBA.init = function() {
  */
 Blockly.ASEBA.finish = function(code) {
   var intvars = [];
-  for (var key in Blockly.ASEBA.GLOBAL_VARIABLES) {
+  for (var key in Blockly.ASEBA.internalVariables_) {
     intvars.push('var ' + key);
   }
   Blockly.ASEBA.definitions_['aseba_int_variables'] = intvars.join('\n');

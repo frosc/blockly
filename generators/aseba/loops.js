@@ -19,7 +19,8 @@
  */
 
 /**
- * @fileoverview Generating JavaScript for loop blocks.
+ * @fileoverview Generating ASEBA for loop blocks.
+ * @author jacques@supcik.net (Jacques Supcik)
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -36,7 +37,7 @@ Blockly.ASEBA['controls_repeat'] = function(block) {
   branch = Blockly.ASEBA.addLoopTrap(branch, block.id);
   var loopVar = Blockly.ASEBA.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
-  Blockly.ASEBA.GLOBAL_VARIABLES[loopVar] = loopVar;
+  Blockly.ASEBA.internalVariables_[loopVar] = loopVar;
   var code = 'for ' + loopVar + ' in 1:' + repeats + ' do\n' +
       branch +
       'end\n';
@@ -53,7 +54,7 @@ Blockly.ASEBA['controls_repeat_ext'] = function(block) {
   var loopVar = Blockly.ASEBA.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
   var endVar = repeats;
-  Blockly.ASEBA.GLOBAL_VARIABLES[loopVar] = loopVar;
+  Blockly.ASEBA.internalVariables_[loopVar] = loopVar;
   
   if (Blockly.isNumber(repeats)) {
     code += 'for ' + loopVar + ' in 1:' + endVar + ' do\n' +
@@ -63,7 +64,7 @@ Blockly.ASEBA['controls_repeat_ext'] = function(block) {
     if (!repeats.match(/^\w+$/)) {
       var endVar = Blockly.ASEBA.variableDB_.getDistinctName(
           'repeat_end', Blockly.Variables.NAME_TYPE);
-      Blockly.ASEBA.GLOBAL_VARIABLES[endVar] = endVar;
+      Blockly.ASEBA.internalVariables_[endVar] = endVar;
       code += endVar + ' = ' + repeats + '\n';
     }
     code += loopVar + ' = 0\n' +
@@ -84,9 +85,9 @@ Blockly.ASEBA['controls_whileUntil'] = function(block) {
   var branch = Blockly.ASEBA.statementToCode(block, 'DO');
   branch = Blockly.ASEBA.addLoopTrap(branch, block.id);
   if (until) {
-    argument0 = '!' + argument0;
+    argument0 = 'not ' + argument0;
   }
-  return 'while (' + argument0 + ') {\n' + branch + '}\n';
+  return 'while ' + argument0 + '\n' + branch + 'end\n';
 };
 
 Blockly.ASEBA['controls_for'] = function(block) {
@@ -173,11 +174,5 @@ Blockly.ASEBA['controls_forEach'] = function(block) {
 
 Blockly.ASEBA['controls_flow_statements'] = function(block) {
   // Flow statements: continue, break.
-  switch (block.getFieldValue('FLOW')) {
-    case 'BREAK':
-      return 'break;\n';
-    case 'CONTINUE':
-      return 'continue;\n';
-  }
-  throw 'Unknown flow statement.';
+  throw 'ASEBA does not support flow statement.';
 };
