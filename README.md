@@ -7,4 +7,4 @@ blocks together to build a programs.  All code is free and open source.
 
 ![](https://developers.google.com/blockly/sample.png)
 
-# adapted by frocs - Fribourg Open Source Community
+# adapted by frosc - Fribourg Open Source Community
