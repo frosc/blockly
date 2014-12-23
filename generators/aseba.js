@@ -140,7 +140,7 @@ Blockly.ASEBA.finish = function(code) {
  * @return {string} Legal line of code.
  */
 Blockly.ASEBA.scrubNakedValue = function(line) {
-  return line + ';\n';
+  return line + '\n'; // modified by t-servi - killing a semicolon ah!ah!ah!
 };
 
 /**

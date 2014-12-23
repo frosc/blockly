@@ -52,7 +52,25 @@ Blockly.ASEBA['math_arithmetic'] = function(block) {
   var code;
   // Power in ASEBA requires a special case since it has no operator.
   if (!operator) {
-    code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
+    // modified by t-servi  
+    code = '# No power function in ASEBA !' +  '\r\n'
+    if(argument1 >= 0 )
+    {
+        code += 'var a = ' +  argument0 + '\r\n'
+        code += 'var b = ' +  argument1 + '\r\n'
+        code += 'var result = 1 ' + '\r\n'
+        code += 'var i = 1 ' + '\r\n'
+        code += 'while  i <= b do ' + '\r\n'
+        code += '   result = result * a ' + '\r\n'
+        code += '   i++' + '\r\n'
+        code += 'end # while ' + '\r\n'
+        code += '# watch your values in Aseba Studio | Variables  ' + '\r\n'
+    }
+    else
+    {
+        code += '# operation not possible : ASEBA understand only natural numbers between -32768 et 32767 ( 16 bits )'
+    }
+    // end of modification
     return [code, Blockly.ASEBA.ORDER_FUNCTION_CALL];
   }
   code = argument0 + operator + argument1;
