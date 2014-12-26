@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Helper functions for generating JavaScript for blocks.
+ * @fileoverview Helper functions for generating ASEBA for blocks.
  * @author jacques@supcik.net (Jacques Supcik)
  * @author fraser@google.com (Neil Fraser)
  */
