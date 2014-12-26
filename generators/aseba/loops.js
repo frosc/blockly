@@ -37,7 +37,7 @@ Blockly.ASEBA['controls_repeat'] = function(block) {
   branch = Blockly.ASEBA.addLoopTrap(branch, block.id);
   var loopVar = Blockly.ASEBA.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
-  Blockly.ASEBA.internalVariables_[loopVar] = loopVar;
+  Blockly.ASEBA.internalVariables_.add(loopVar);
   var code = 'for ' + loopVar + ' in 1:' + repeats + ' do\n' +
       branch +
       'end\n';
@@ -54,7 +54,7 @@ Blockly.ASEBA['controls_repeat_ext'] = function(block) {
   var loopVar = Blockly.ASEBA.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
   var endVar = repeats;
-  Blockly.ASEBA.internalVariables_[loopVar] = loopVar;
+  Blockly.ASEBA.internalVariables_.add(loopVar);
   
   if (Blockly.isNumber(repeats)) {
     code += 'for ' + loopVar + ' in 1:' + endVar + ' do\n' +
@@ -64,7 +64,7 @@ Blockly.ASEBA['controls_repeat_ext'] = function(block) {
     if (!repeats.match(/^\w+$/)) {
       var endVar = Blockly.ASEBA.variableDB_.getDistinctName(
           'repeat_end', Blockly.Variables.NAME_TYPE);
-      Blockly.ASEBA.internalVariables_[endVar] = endVar;
+      Blockly.ASEBA.internalVariables_.add(endVar);
       code += endVar + ' = ' + repeats + '\n';
     }
     code += loopVar + ' = 0\n' +
