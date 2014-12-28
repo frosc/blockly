@@ -1,5 +1,5 @@
 var MSG = {
-  title: "Code",
+  title: "Aseba",
   blocks: "Blocks",
   linkTooltip: "Save and link to blocks.",
   runTooltip: "Run the program defined by the blocks in the workspace.",
@@ -15,6 +15,11 @@ var MSG = {
   catColour: "Colour",
   catVariables: "Variables",
   catFunctions: "Functions",
+  catLeds: "LEDs",
+  catSd: "SD Card",
+  catSound: "Sound",
+  catComm: "Communication",
+  catThymio2Vars: "Variables Thymio II",
   listVariable: "list",
   textVariable: "text",
   httpRequestError: "There was a problem with the request.",
