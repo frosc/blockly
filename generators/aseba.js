@@ -142,7 +142,7 @@ Blockly.ASEBA.finish = function(code) {
  * @return {string} Legal line of code.
  */
 Blockly.ASEBA.scrubNakedValue = function(line) {
-  return line + ';\n';
+  return '#' + line + '\n';
 };
 
 /**
@@ -161,12 +161,12 @@ Blockly.ASEBA.quote_ = function(string) {
 };
 
 /**
- * Common tasks for generating JavaScript from blocks.
+ * Common tasks for generating ASEBA from blocks.
  * Handles comments for the specified block and any connected value blocks.
  * Calls any statements following this block.
  * @param {!Blockly.Block} block The current block.
- * @param {string} code The JavaScript code created for this block.
- * @return {string} JavaScript code with comments and subsequent blocks added.
+ * @param {string} code The ASEBA code created for this block.
+ * @return {string} ASEBA code with comments and subsequent blocks added.
  * @private
  */
 Blockly.ASEBA.scrub_ = function(block, code) {
@@ -195,4 +195,44 @@ Blockly.ASEBA.scrub_ = function(block, code) {
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   var nextCode = Blockly.ASEBA.blockToCode(nextBlock);
   return commentCode + code + nextCode;
+};
+
+/**
+ * Generate code for all blocks in the workspace to the specified language.
+ * @return {string} Generated code.
+ */
+Blockly.ASEBA.workspaceToCode = function() {
+  var main = [];
+  var events = [];
+  this.init();
+  var blocks = Blockly.mainWorkspace.getTopBlocks(true);
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var line = this.blockToCode(block);
+    if (goog.isArray(line)) {
+      // Value blocks return tuples of code and operator order.
+      // Top-level blocks don't care about operator order.
+      line = line[0];
+    }
+    if (line) {
+      if (block.outputConnection && this.scrubNakedValue) {
+        // This block is a naked value.  Ask the language's code generator if
+        // it wants to append a semicolon, or something.
+        line = this.scrubNakedValue(line);
+      }
+      if (block.type == 'thymio2_onevent') {
+        events.push(line)
+      } else {
+        main.push(line)
+      }
+    }
+  }
+
+  var code = main.concat(events);
+  code = code.join('\n');  // Blank line between each section.
+  code = this.finish(code);
+  // Final scrubbing of whitespace.
+  code = code.replace(/^\s+\n/, '');
+  code = code.replace(/\n\s+$/, '\n');
+  code = code.replace(/[ \t]+\n/g, '\n');
+  return code;
 };
