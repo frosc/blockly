@@ -320,14 +320,6 @@ Code.renderContent = function() {
       code = prettyPrintOne(code, 'dart');
       content.innerHTML = code;
     }
-  } else if (content.id == 'content_aseba') {
-    code = Blockly.ASEBA.workspaceToCode();
-    content.textContent = code;
-    if (typeof prettyPrintOne == 'function') {
-      code = content.innerHTML;
-      code = prettyPrintOne(code, 'aseba');
-      content.innerHTML = code;
-    }
   }
 };
 
