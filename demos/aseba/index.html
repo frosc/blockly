@@ -7,10 +7,24 @@
   <link rel="stylesheet" href="style.css">
   <script src="/storage.js"></script>
   <script src="../../blockly_uncompressed.js"></script>
-  <script src="../../blocks_compressed.js"></script>
+  <!-- script src="../../blocks.js"></script -->
+  <script src="../../blocks/colour.js"></script>
+  <script src="../../blocks/lists.js"></script>
+  <script src="../../blocks/logic.js"></script>
+  <script src="../../blocks/loops.js"></script>
+  <script src="../../blocks/math.js"></script>
+  <script src="../../blocks/aseba.js"></script>
+  <script src="../../blocks/thymio2/events.js"></script>
+  <script src="../../blocks/thymio2/leds.js"></script>
+  <script src="../../blocks/thymio2/math.js"></script>
+  <script src="../../blocks/thymio2/prox.js"></script>
+  <script src="../../blocks/thymio2/sd.js"></script>
+  <script src="../../blocks/thymio2/sound.js"></script>
+  <script src="../../blocks/thymio2/systemvars.js"></script>
+  <script src="../../blocks/procedures.js"></script>
+  <script src="../../blocks/text.js"></script>
+  <script src="../../blocks/variables.js"></script>
   <script src="../../javascript_compressed.js"></script>
-  <script src="../../python_compressed.js"></script>
-  <script src="../../dart_compressed.js"></script>
   <script src="../../generators/aseba.js"></script>
   <script src="../../generators/aseba/logic.js"></script>
   <script src="../../generators/aseba/loops.js"></script>
@@ -20,6 +34,7 @@
   <script src="../../generators/aseba/colour.js"></script>
   <script src="../../generators/aseba/variables.js"></script>
   <script src="../../generators/aseba/procedures.js"></script>
+  <script src="../../generators/aseba/thymio2.js"></script>
   <script src="code.js"></script>
 </head>
 <body>
@@ -43,11 +58,7 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
-            <td id="tab_python" class="taboff">Python</td>
-            <td class="tabmin">&nbsp;</td>
-            <td id="tab_dart" class="taboff">Dart</td>
-            <td class="tabmin">&nbsp;</td>
-            <td id="tab_aseba" class="taboff">ASEBA</td>
+            <td id="tab_aseba" class="taboff">Aseba</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
@@ -72,20 +83,20 @@
   </table>
   <div id="content_blocks" class="content"></div>
   <pre id="content_javascript" class="content"></pre>
-  <pre id="content_python" class="content"></pre>
-  <pre id="content_dart" class="content"></pre>
   <pre id="content_aseba" class="content"></pre>
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
     <category id="catLogic">
+      <block type="thymio2_onevent"></block>
       <block type="controls_if"></block>
+      <block type="aseba_when"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
+      <!-- block type="logic_boolean"></block -->
+      <!-- block type="logic_null"></block -->
+      <!-- block type="logic_ternary"></block -->
     </category>
     <category id="catLoops">
       <block type="controls_repeat_ext">
@@ -113,27 +124,27 @@
           </block>
         </value>
       </block>
-      <block type="controls_forEach"></block>
-      <block type="controls_flow_statements"></block>
+      <!-- block type="controls_forEach"></block -->
+      <!-- block type="controls_flow_statements"></block -->
     </category>
     <category id="catMath">
       <block type="math_number"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
-      <block type="math_trig"></block>
-      <block type="math_constant"></block>
-      <block type="math_number_property"></block>
-      <block type="math_change">
+      <block type="aseba_arithmetic"></block>
+      <block type="aseba_single"></block>
+      <!-- block type="math_trig"></block -->
+      <!-- block type="math_constant"></block -->
+      <!-- block type="math_number_property"></block -->
+      <!-- block type="math_change">
         <value name="DELTA">
           <block type="math_number">
             <field name="NUM">1</field>
           </block>
         </value>
-      </block>
-      <block type="math_round"></block>
-      <block type="math_on_list"></block>
+      </block -->
+      <!-- block type="math_round"></block -->
+      <!-- block type="math_on_list"></block -->
       <block type="math_modulo"></block>
-      <block type="math_constrain">
+      <!-- block type="math_constrain">
         <value name="LOW">
           <block type="math_number">
             <field name="NUM">1</field>
@@ -144,8 +155,8 @@
             <field name="NUM">100</field>
           </block>
         </value>
-      </block>
-      <block type="math_random_int">
+      </block -->
+      <!-- block type="math_random_int">
         <value name="FROM">
           <block type="math_number">
             <field name="NUM">1</field>
@@ -156,10 +167,25 @@
             <field name="NUM">100</field>
           </block>
         </value>
-      </block>
-      <block type="math_random_float"></block>
+      </block -->
+      <!-- block type="math_random_float"></block -->
+      <block type="thymio2_math_op"></block>
+      <block type="thymio2_math_copy"></block>
+      <block type="thymio2_math_fill"></block>
+      <block type="thymio2_math_addscalar"></block>
+      <block type="thymio2_math_clamp"></block>
+      <block type="thymio2_math_dot"></block>
+      <block type="thymio2_math_stat"></block>
+      <block type="thymio2_math_argbounds"></block>
+      <block type="thymio2_math_sort"></block>
+      <block type="thymio2_math_muldiv"></block>
+      <block type="thymio2_math_atan2"></block>
+      <block type="thymio2_math_trig"></block>
+      <block type="thymio2_math_rot2"></block>
+      <block type="thymio2_math_sqrt"></block>
+      <block type="thymio2_math_rand"></block>
     </category>
-    <category id="catText">
+    <!-- category id="catText">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -198,7 +224,7 @@
           <block type="text"></block>
         </value>
       </block>
-    </category>
+    </category -->
     <category id="catLists">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
@@ -278,7 +304,56 @@
         </value>
       </block>
     </category>
+    <category id="catLeds">
+      <block type="thymio2_leds"></block>
+      <block type="thymio2_leds_circle"></block>
+      <block type="thymio2_leds_buttons"></block>
+      <block type="thymio2_leds_prox_h"></block>
+      <block type="thymio2_leds_prox_v"></block>
+      <block type="thymio2_leds_rc"></block>
+      <block type="thymio2_leds_sound"></block>
+      <block type="thymio2_leds_temperature"></block>
+    </category>
+    <category id="catSound">
+      <block type="thymio2_sound"></block>
+      <block type="thymio2_sound_play"></block>
+      <block type="thymio2_sound_system"></block>
+      <block type="thymio2_sound_freq"></block>
+      <block type="thymio2_sound_wave"></block>
+    </category>
+    <category id="catComm">
+      <block type="thymio2_prox_comm"></block>
+      <block type="thymio2_prox_comm_enable"></block>
+      <block type="thymio2_prox_comm_disable"></block>
+    </category>
+    <category id="catSd">
+      <block type="thymio2_sd_open"></block>
+      <block type="thymio2_sd_read"></block>
+      <block type="thymio2_sd_write"></block>
+      <block type="thymio2_sd_seek"></block>
+    </category>
     <category id="catVariables" custom="VARIABLE"></category>
+    <category id="catThymio2Vars">
+      <block type="thymio2_var_event_source"></block>
+      <block type="thymio2_var_event_args"></block>
+      <block type="thymio2_var_button"></block>
+      <block type="thymio2_var_prox_horizontal"></block>
+      <block type="thymio2_var_prox_comm"></block>
+      <block type="thymio2_var_prox_comm_tx_set"></block>
+      <block type="thymio2_var_prox_ground"></block>
+      <block type="thymio2_var_motor"></block>
+      <block type="thymio2_var_motor_target_set"></block>
+      <block type="thymio2_var_acc"></block>
+      <block type="thymio2_var_temperature"></block>
+      <block type="thymio2_var_rc5"></block>
+      <block type="thymio2_var_mic"></block>
+      <block type="thymio2_var_mic_threshold_set"></block>
+      <block type="thymio2_var_timer_period"></block>
+      <block type="thymio2_var_timer_period_set"></block>
+
+
+    </category>
+
     <category id="catFunctions" custom="PROCEDURE"></category>
   </xml>
 
