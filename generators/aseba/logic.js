@@ -28,6 +28,14 @@ goog.provide('Blockly.ASEBA.logic');
 
 goog.require('Blockly.ASEBA');
 
+Blockly.ASEBA['thymio2_onevent'] = function(block) {
+  var event_name = block.getFieldValue('EVENT');
+  var branch = Blockly.ASEBA.statementToCode(block, 'DO');
+
+  var code = 'onevent ' + event_name + '\n' + branch;
+  return code + '\n';
+};
+
 
 Blockly.ASEBA['controls_if'] = function(block) {
   // If/elseif/else condition.
@@ -103,24 +111,13 @@ Blockly.ASEBA['logic_negate'] = function(block) {
 };
 
 Blockly.ASEBA['logic_boolean'] = function(block) {
-  // Boolean values true and false.
-  var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
-  return [code, Blockly.ASEBA.ORDER_ATOMIC];
+  throw("Not Implemented");
 };
 
 Blockly.ASEBA['logic_null'] = function(block) {
-  // Null data type.
-  return ['null', Blockly.ASEBA.ORDER_ATOMIC];
+  throw("Not Implemented");
 };
 
 Blockly.ASEBA['logic_ternary'] = function(block) {
-  // Ternary operator.
-  var value_if = Blockly.ASEBA.valueToCode(block, 'IF',
-      Blockly.ASEBA.ORDER_CONDITIONAL) || 'false';
-  var value_then = Blockly.ASEBA.valueToCode(block, 'THEN',
-      Blockly.ASEBA.ORDER_CONDITIONAL) || 'null';
-  var value_else = Blockly.ASEBA.valueToCode(block, 'ELSE',
-      Blockly.ASEBA.ORDER_CONDITIONAL) || 'null';
-  var code = value_if + ' ? ' + value_then + ' : ' + value_else;
-  return [code, Blockly.ASEBA.ORDER_CONDITIONAL];
+  throw("Not Implemented");
 };
